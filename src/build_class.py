@@ -6,7 +6,7 @@ def fetch_and_build(idx):
     idx = int(idx * 15)
 
     # endpoint
-    url = f"https://api.jolpi.ca/ergast/f1/2024/results/?offset={idx}"
+    url = f"https://api.jolpi.ca/ergast/f1/2024/last/results/"
 
     res = requests.get(url)
     if res.status_code == 200:
