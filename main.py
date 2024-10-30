@@ -1,17 +1,17 @@
-import src.build_class
-import src.parse_to_csv
+import src.fetcher as f
+import src.printer as p
 
 def main():
-    index = int(input("Enter index number (count sprints as well): "))
+    print("Fetching most recent results...\n")
+    race, results = f.fetch()
+    if (race == 0 or results == 0):
+        print("Error fetching results!")
+        return
     
-    # Fetch and build the list of Driver instances
-    drivers = src.build_class.fetch_and_build(index)
-    
-    # Parse the list to CSV formatted string
-    csv_data = src.parse_to_csv.parse_to_csv(drivers)
-    
-    # Print or save the CSV data
-    print(csv_data)
+    # TODO: add dataclass for staging once db is live
+    p.pretty_print(race, results)
+
+
 
 if __name__ == "__main__":
     main()
