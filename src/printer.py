@@ -8,7 +8,8 @@ def pretty_print(race, results):
 
     for entry in results:
         code = entry['Driver']['code']
-        pts = entry['points']
+        pts = 2 * int(entry['points'])
+        pts = str(pts)
         if len(pts) == 1:
             pts = "0" + pts
         laps = entry['laps']
@@ -25,3 +26,11 @@ def pretty_print(race, results):
     print("+--------+--------+------+-------+")
 
 
+def sql_to_file(out_file, race_sql, driver_results_sql):
+    with open(out_file, "w") as f:
+        f.write("-- SQL for inserting race\n")
+        f.write(race_sql)
+        f.write("\n-- SQL for inserting driver results\n")
+        f.writelines(driver_results_sql)
+
+    print(f"SQL queries have been written to {out_file} for manual inspection.")
